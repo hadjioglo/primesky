@@ -1,15 +1,15 @@
 @smoke @critical-path
 Feature: PrimeSky Website Core Functionality
   As a user of the PrimeSky website
-  I want to access and navigate the core features
-  So that I can accomplish my intended tasks
+  The user wants to access and navigate the core features
+  So that tasks can be accomplished efficiently
 
   Background:
-    Given I am on the PrimeSky homepage
+    Given the user is on the PrimeSky homepage
 
   @page-load @high-priority
   Scenario: Verify homepage loads successfully
-    When I navigate to the PrimeSky website
+    When the user navigates to the PrimeSky website
     Then the page should load completely
     And the page title should be displayed
     And all critical page elements should be visible
@@ -17,8 +17,8 @@ Feature: PrimeSky Website Core Functionality
 
   @navigation @high-priority
   Scenario Outline: Verify main navigation functionality
-    When I click on the "<navigation_item>" in the main menu
-    Then I should be navigated to the "<expected_page>" page
+    When the user clicks on the "<navigation_item>" in the main menu
+    Then the user should be navigated to the "<expected_page>" page
     And the page should load within acceptable time
     And the navigation item should be highlighted as active
 
@@ -31,8 +31,8 @@ Feature: PrimeSky Website Core Functionality
 
   @responsive @medium-priority
   Scenario Outline: Verify responsive design functionality
-    Given I am viewing the website on "<device_type>"
-    When I resize the browser to "<viewport_size>"
+    Given the user is viewing the website on "<device_type>"
+    When the user resizes the browser to "<viewport_size>"
     Then the page layout should adapt appropriately
     And all navigation elements should remain accessible
     And content should be readable and properly formatted
@@ -45,7 +45,7 @@ Feature: PrimeSky Website Core Functionality
 
   @performance @medium-priority
   Scenario: Verify page performance metrics
-    When I navigate to the homepage
+    When the user navigates to the homepage
     Then the page should load within 3 seconds
     And all images should load properly
     And the page should be interactive within 5 seconds
@@ -53,7 +53,7 @@ Feature: PrimeSky Website Core Functionality
 
   @accessibility @medium-priority
   Scenario: Verify basic accessibility compliance
-    When I navigate to the homepage
+    When the user navigates to the homepage
     Then all images should have alt text
     And form elements should have proper labels
     And the page should be navigable using keyboard only

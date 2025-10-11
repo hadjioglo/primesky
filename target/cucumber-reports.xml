@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="115.2" tests="21" skipped="0" failures="21" errors="0">
+<testcase classname="PrimeSky Website Core Functionality" name="Verify homepage loads successfully" time="11.704">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+When the user navigates to the PrimeSky website.............................skipped
+Then the page should load completely........................................skipped
+And the page title should be displayed......................................skipped
+And all critical page elements should be visible............................skipped
+And no JavaScript errors should be present..................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky Website Core Functionality" name="Verify main navigation functionality - Example #1.1" time="5.925">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+When the user clicks on the "Home" in the main menu.........................skipped
+Then the user should be navigated to the "Homepage" page....................skipped
+And the page should load within acceptable time.............................skipped
+And the navigation item should be highlighted as active.....................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky Website Core Functionality" name="Verify main navigation functionality - Example #1.2" time="5.774">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+When the user clicks on the "About" in the main menu........................skipped
+Then the user should be navigated to the "About Us" page....................skipped
+And the page should load within acceptable time.............................skipped
+And the navigation item should be highlighted as active.....................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky Website Core Functionality" name="Verify main navigation functionality - Example #1.3" time="5.076">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+When the user clicks on the "Services" in the main menu.....................skipped
+Then the user should be navigated to the "Services" page....................skipped
+And the page should load within acceptable time.............................skipped
+And the navigation item should be highlighted as active.....................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky Website Core Functionality" name="Verify main navigation functionality - Example #1.4" time="5.811">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+When the user clicks on the "Contact" in the main menu......................skipped
+Then the user should be navigated to the "Contact" page.....................skipped
+And the page should load within acceptable time.............................skipped
+And the navigation item should be highlighted as active.....................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky Website Core Functionality" name="Verify responsive design functionality - Example #1.1" time="4.801">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the user is viewing the website on "Desktop"..........................skipped
+When the user resizes the browser to "1920x1080"............................skipped
+Then the page layout should adapt appropriately.............................skipped
+And all navigation elements should remain accessible........................skipped
+And content should be readable and properly formatted.......................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky Website Core Functionality" name="Verify responsive design functionality - Example #1.2" time="4.797">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the user is viewing the website on "Tablet"...........................skipped
+When the user resizes the browser to "768x1024".............................skipped
+Then the page layout should adapt appropriately.............................skipped
+And all navigation elements should remain accessible........................skipped
+And content should be readable and properly formatted.......................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky Website Core Functionality" name="Verify responsive design functionality - Example #1.3" time="5.496">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the user is viewing the website on "Mobile"...........................skipped
+When the user resizes the browser to "375x667"..............................skipped
+Then the page layout should adapt appropriately.............................skipped
+And all navigation elements should remain accessible........................skipped
+And content should be readable and properly formatted.......................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky Website Core Functionality" name="Verify page performance metrics" time="5.256">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+When the user navigates to the homepage.....................................skipped
+Then the page should load within 3 seconds..................................skipped
+And all images should load properly.........................................skipped
+And the page should be interactive within 5 seconds.........................skipped
+And there should be no console errors.......................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky Website Core Functionality" name="Verify basic accessibility compliance" time="6.034">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/core_functionality.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+When the user navigates to the homepage.....................................skipped
+Then all images should have alt text........................................skipped
+And form elements should have proper labels.................................skipped
+And the page should be navigable using keyboard only........................skipped
+And color contrast should meet WCAG guidelines..............................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Verify contact form validation" time="5.177">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the user navigates to the contact page................................skipped
+When the contact form is submitted without filling required fields..........skipped
+Then appropriate validation error messages should be displayed..............skipped
+And the form should not be submitted........................................skipped
+And error messages should be clearly visible................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Verify successful form submission" time="5.096">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the user navigates to the contact page................................skipped
+When all required fields are filled with valid data.........................skipped
+And the contact form is submitted...........................................skipped
+Then a success confirmation message should be displayed.....................skipped
+And the form should be reset or show appropriate next steps.................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Verify search functionality - Example #1.1" time="4.812">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the search feature is available.......................................skipped
+When a search for "services" is performed...................................skipped
+Then search results related to "services" should be displayed...............skipped
+And the results should be properly formatted................................skipped
+And pagination should work if applicable....................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Verify search functionality - Example #1.2" time="4.963">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the search feature is available.......................................skipped
+When a search for "contact" is performed....................................skipped
+Then search results related to "contact" should be displayed................skipped
+And the results should be properly formatted................................skipped
+And pagination should work if applicable....................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Verify search functionality - Example #1.3" time="4.713">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the search feature is available.......................................skipped
+When a search for "about" is performed......................................skipped
+Then search results related to "about" should be displayed..................skipped
+And the results should be properly formatted................................skipped
+And pagination should work if applicable....................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Verify interactive UI elements" time="4.794">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+When dropdown menus are interacted with.....................................skipped
+Then they should expand and collapse properly...............................skipped
+When navigation items are hovered over......................................skipped
+Then appropriate hover effects should be displayed..........................skipped
+When action buttons are clicked.............................................skipped
+Then visual feedback should be provided.....................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Verify error handling for invalid inputs" time="5.032">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given a page with input forms is open.......................................skipped
+When invalid data is entered in form fields.................................skipped
+Then appropriate error messages should be displayed.........................skipped
+And the form should prevent submission......................................skipped
+And error styling should be applied to invalid fields.......................skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Search for flights with valid criteria" time="5.472">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the flight search page is open........................................skipped
+When the flight search form is filled with valid details....................skipped
+And the flight search is submitted..........................................skipped
+Then a list of available flights should be displayed........................skipped
+And the search results should contain flights from "New York" to "Los Angeles".skipped
+And the results should show the correct departure date......................skipped
+And the results should display flight details like price, duration, and airline.skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Search for one-way flights" time="4.753">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the flight search page is open........................................skipped
+When "One Way" trip type is selected........................................skipped
+And the one-way flight search form is filled................................skipped
+And the flight search is submitted..........................................skipped
+Then a list of available one-way flights should be displayed................skipped
+And the search results should not show return flight options................skipped
+And each flight result should display departure time and arrival time.......skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Validate flight search form fields" time="4.762">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the flight search page is open........................................skipped
+When the flight search form is submitted without filling required fields....skipped
+Then validation errors for required fields should be displayed..............skipped
+And the search should not be executed.......................................skipped
+When an invalid departure date in the past is entered.......................skipped
+Then an error message about invalid date should be displayed................skipped
+When the same city is entered for origin and destination....................skipped
+Then an error message about identical locations should be displayed.........skipped
+]]></system-out>
+</testcase>
+<testcase classname="PrimeSky User Interaction and Forms" name="Apply filters to flight search results" time="4.551">
+<failure type="org.opentest4j.AssertionFailedError" message="Should be on PrimeSky homepage ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;">
+<![CDATA[org.opentest4j.AssertionFailedError: Should be on PrimeSky homepage ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at steps.PrimeSkyWebsiteSteps.user_is_on_the_primesky_homepage(PrimeSkyWebsiteSteps.java:74)
+	at ✽.the user is on the PrimeSky homepage(classpath:features/user_interactions.feature:8)
+]]>
+</failure>
+<system-out><![CDATA[
+Given the user is on the PrimeSky homepage..................................failed
+Given the flight search page is open........................................skipped
+And a flight search with results displayed has been performed...............skipped
+When filters are applied to the search results..............................skipped
+Then the results should be filtered accordingly.............................skipped
+And only flights matching the filter criteria should be displayed...........skipped
+And the filter count should be updated......................................skipped
+]]></system-out>
+</testcase>
+</testsuite>

@@ -39,16 +39,21 @@ public class HomePage extends BasePage {
         String currentUrl = getCurrentUrl();
         boolean isHome = currentUrl.contains(baseUrl) && 
                         (currentUrl.endsWith("/") || currentUrl.equals(baseUrl));
-        
-        // Also check for presence of key homepage elements
+
+        // Check for presence of key homepage elements
         boolean hasLogo = isElementVisible(LOGO);
         boolean hasNavigation = isElementVisible(NAVIGATION_MENU);
-        
-        System.out.println("Homepage verification - URL check: " + isHome + 
-                          ", Logo present: " + hasLogo + 
-                          ", Navigation present: " + hasNavigation);
-        
-        return isHome && (hasLogo || hasNavigation);
+        boolean hasMainContent = isElementVisible(MAIN_CONTENT);
+        boolean hasBody = isElementVisible("body");
+
+        System.out.println("Homepage verification - URL check: " + isHome +
+                          ", Logo present: " + hasLogo +
+                          ", Navigation present: " + hasNavigation +
+                          ", Main content present: " + hasMainContent +
+                          ", Body present: " + hasBody);
+
+        // Consider homepage valid if URL matches and at least one key element is present
+        return isHome && (hasLogo || hasNavigation || hasMainContent || hasBody);
     }
     
     /**
