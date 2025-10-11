@@ -1,38 +1,38 @@
 @user-interactions @forms
 Feature: PrimeSky User Interaction and Forms
   As a user of the PrimeSky website
-  I want to interact with forms and UI elements
-  So that I can complete my tasks and provide information
+  The user wants to interact with forms and UI elements
+  So that tasks can be completed and information provided
 
   Background:
-    Given I am on the PrimeSky homepage
+    Given the user is on the PrimeSky homepage
 
   @form-validation @high-priority
   Scenario: Verify contact form validation
-    Given I navigate to the contact page
-    When I submit the contact form without filling required fields
-    Then I should see appropriate validation error messages
+    Given the user navigates to the contact page
+    When the contact form is submitted without filling required fields
+    Then appropriate validation error messages should be displayed
     And the form should not be submitted
     And error messages should be clearly visible
 
   @form-submission @high-priority
   Scenario: Verify successful form submission
-    Given I navigate to the contact page
-    When I fill in all required fields with valid data
+    Given the user navigates to the contact page
+    When all required fields are filled with valid data
       | Field        | Value                    |
       | Name         | John Doe                |
       | Email        | john.doe@example.com    |
       | Subject      | Test Inquiry            |
       | Message      | This is a test message  |
-    And I submit the contact form
-    Then I should see a success confirmation message
+    And the contact form is submitted
+    Then a success confirmation message should be displayed
     And the form should be reset or show appropriate next steps
 
   @search-functionality @medium-priority
   Scenario Outline: Verify search functionality
     Given the search feature is available
-    When I search for "<search_term>"
-    Then I should see search results related to "<search_term>"
+    When a search for "<search_term>" is performed
+    Then search results related to "<search_term>" should be displayed
     And the results should be properly formatted
     And pagination should work if applicable
 
@@ -44,17 +44,17 @@ Feature: PrimeSky User Interaction and Forms
 
   @interactive-elements @medium-priority
   Scenario: Verify interactive UI elements
-    When I interact with dropdown menus
+    When dropdown menus are interacted with
     Then they should expand and collapse properly
-    When I hover over navigation items
+    When navigation items are hovered over
     Then appropriate hover effects should be displayed
-    When I click on action buttons
-    Then they should provide visual feedback
+    When action buttons are clicked
+    Then visual feedback should be provided
 
   @error-handling @medium-priority
   Scenario: Verify error handling for invalid inputs
-    Given I am on a page with input forms
-    When I enter invalid data in form fields
+    Given a page with input forms is open
+    When invalid data is entered in form fields
       | Field    | Invalid_Value           |
       | Email    | invalid-email-format   |
       | Phone    | invalid-phone-123      |
@@ -65,8 +65,8 @@ Feature: PrimeSky User Interaction and Forms
 
   @flight-search @high-priority
   Scenario: Search for flights with valid criteria
-    Given I am on the flight search page
-    When I fill in the flight search form with valid details
+    Given the flight search page is open
+    When the flight search form is filled with valid details
       | Field           | Value       |
       | Origin          | New York    |
       | Destination     | Los Angeles |
@@ -74,43 +74,43 @@ Feature: PrimeSky User Interaction and Forms
       | Return Date     | 2025-12-22  |
       | Passengers      | 2           |
       | Trip Type       | Round Trip  |
-    And I submit the flight search
-    Then I should see a list of available flights
+    And the flight search is submitted
+    Then a list of available flights should be displayed
     And the search results should contain flights from "New York" to "Los Angeles"
     And the results should show the correct departure date
     And the results should display flight details like price, duration, and airline
 
   @flight-search @medium-priority
   Scenario: Search for one-way flights
-    Given I am on the flight search page
-    When I select "One Way" trip type
-    And I fill in the one-way flight search form
+    Given the flight search page is open
+    When "One Way" trip type is selected
+    And the one-way flight search form is filled
       | Field           | Value       |
       | Origin          | Chicago     |
       | Destination     | Miami       |
       | Departure Date  | 2025-11-20  |
       | Passengers      | 1           |
-    And I submit the flight search
-    Then I should see a list of available one-way flights
+    And the flight search is submitted
+    Then a list of available one-way flights should be displayed
     And the search results should not show return flight options
     And each flight result should display departure time and arrival time
 
   @flight-search @validation @medium-priority
   Scenario: Validate flight search form fields
-    Given I am on the flight search page
-    When I submit the flight search form without filling required fields
-    Then I should see validation errors for required fields
+    Given the flight search page is open
+    When the flight search form is submitted without filling required fields
+    Then validation errors for required fields should be displayed
     And the search should not be executed
-    When I enter an invalid departure date in the past
-    Then I should see an error message about invalid date
-    When I enter the same city for origin and destination
-    Then I should see an error message about identical locations
+    When an invalid departure date in the past is entered
+    Then an error message about invalid date should be displayed
+    When the same city is entered for origin and destination
+    Then an error message about identical locations should be displayed
 
   @flight-search @filters @low-priority
   Scenario: Apply filters to flight search results
-    Given I am on the flight search page
-    And I have performed a flight search with results displayed
-    When I apply filters to the search results
+    Given the flight search page is open
+    And a flight search with results displayed has been performed
+    When filters are applied to the search results
       | Filter Type    | Value       |
       | Price Range    | $200-$500   |
       | Departure Time | Morning     |
