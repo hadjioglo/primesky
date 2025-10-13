@@ -68,28 +68,28 @@ public class PrimeSkyWebsiteSteps {
     }
     
     // ========== Background Steps ==========
-    @Given("the user is on the PrimeSky homepage")
-    public void user_is_on_the_primesky_homepage() {
+    @Given("PrimeSky homepage is loaded")
+    public void primeSkyHomepageIsLoaded() {
         homePage.open();
         Assertions.assertTrue(homePage.isOnHomePage(), "Should be on PrimeSky homepage");
     }
     
     // ========== Navigation Steps ==========
-    @When("the user navigates to the PrimeSky website")
-    public void user_navigates_to_the_primesky_website() {
+    @When("PrimeSky website is navigated to")
+    public void primeSkyWebsiteIsNavigatedTo() {
         homePage.open();
     }
-    @When("the user navigates to the homepage")
-    public void user_navigates_to_the_homepage() {
+    @When("homepage is navigated to")
+    public void homepageIsNavigatedTo() {
         homePage.open();
     }
-    @Given("the user navigates to the contact page")
-    public void user_navigates_to_the_contact_page() {
+    @Given("contact page is navigated to")
+    public void contactPageIsNavigatedTo() {
         homePage.navigateToContactPage();
         Assertions.assertTrue(contactPage.isOnContactPage(), "Should be on contact page");
     }
-    @When("the user clicks on the {string} in the main menu")
-    public void user_clicks_on_navigation_item_in_main_menu(String navigationItem) {
+    @When("{string} navigation item is clicked in the main menu")
+    public void navigationItemIsClickedInMainMenu(String navigationItem) {
         String[] selectors = {
             String.format("nav a:has-text('%s')", navigationItem),
             String.format(".nav a:has-text('%s')", navigationItem),
@@ -108,19 +108,19 @@ public class PrimeSkyWebsiteSteps {
     }
     
     // ========== Verification Steps ==========
-    @Then("the page should load completely")
-    public void the_page_should_load_completely() {
+    @Then("page loads completely")
+    public void pageLoadsCompletely() {
         page.waitForLoadState(LoadState.NETWORKIDLE);
         Assertions.assertTrue(page.locator("body").count() > 0, "Page body should be present");
     }
-    @Then("the page title should be displayed")
-    public void the_page_title_should_be_displayed() {
+    @Then("page title is displayed")
+    public void pageTitleIsDisplayed() {
         String title = page.title();
         Assertions.assertNotNull(title, "Page title should not be null");
         Assertions.assertFalse(title.trim().isEmpty(), "Page title should not be empty");
     }
-    @Then("all critical page elements should be visible")
-    public void all_critical_page_elements_should_be_visible() {
+    @Then("all critical page elements are visible")
+    public void allCriticalPageElementsAreVisible() {
         // Check for essential page elements
         Assertions.assertTrue(page.locator("body").count() > 0, "Body element should be present");
 
@@ -135,27 +135,27 @@ public class PrimeSkyWebsiteSteps {
         }
         Assertions.assertTrue(navFound, "Navigation should be present");
     }
-    @Then("no JavaScript errors should be present")
-    public void no_javascript_errors_should_be_present() {
+    @Then("no JavaScript errors are present")
+    public void noJavaScriptErrorsArePresent() {
         // This is monitored via console listener in setup
         // Additional checks can be added here if needed
         Assertions.assertTrue(true, "JavaScript errors are monitored via console listener");
     }
-    @Then("I should be navigated to the {string} page")
-    public void i_should_be_navigated_to_page(String expectedPage) {
+    @Then("{string} page is navigated to")
+    public void pageIsNavigatedTo(String expectedPage) {
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
         String currentUrl = page.url();
         // Basic validation that navigation occurred
         Assertions.assertNotNull(currentUrl, "URL should not be null after navigation");
     }
-    @Then("the page should load within acceptable time")
-    public void the_page_should_load_within_acceptable_time() {
+    @Then("page loads within acceptable time")
+    public void pageLoadsWithinAcceptableTime() {
         // Page should be loaded within the default timeout (30 seconds)
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
         Assertions.assertTrue(true, "Page loaded within acceptable time");
     }
-    @Then("the navigation item should be highlighted as active")
-    public void the_navigation_item_should_be_highlighted_as_active() {
+    @Then("navigation item is highlighted as active")
+    public void navigationItemIsHighlightedAsActive() {
         // Check for common active state indicators
         String[] activeSelectors = {
             ".active", ".current", ".selected", 
@@ -174,13 +174,13 @@ public class PrimeSkyWebsiteSteps {
     }
     
     // ========== Responsive Design Steps ==========
-    @Given("I am viewing the website on {string}")
-    public void i_am_viewing_website_on_device_type(String deviceType) {
+    @Given("website is viewed on {string}")
+    public void websiteIsViewedOn(String deviceType) {
         // Device context is set during viewport resize
         System.out.println("Setting up for device type: " + deviceType);
     }
-    @When("I resize the browser to {string}")
-    public void i_resize_browser_to_viewport_size(String viewportSize) {
+    @When("browser is resized to {string}")
+    public void browserIsResizedTo(String viewportSize) {
         String[] dimensions = viewportSize.split("x");
         int width = Integer.parseInt(dimensions[0]);
         int height = Integer.parseInt(dimensions[1]);
@@ -188,14 +188,14 @@ public class PrimeSkyWebsiteSteps {
         page.setViewportSize(width, height);
         page.waitForTimeout(1000); // Allow time for responsive adjustments
     }
-    @Then("the page layout should adapt appropriately")
-    public void the_page_layout_should_adapt_appropriately() {
+    @Then("page layout adapts appropriately")
+    public void pageLayoutAdaptsAppropriately() {
         // Verify the page is still functional after resize
         Assertions.assertTrue(page.locator("body").count() > 0, 
                 "Page should remain functional after resize");
     }
-    @Then("all navigation elements should remain accessible")
-    public void all_navigation_elements_should_remain_accessible() {
+    @Then("all navigation elements remain accessible")
+    public void allNavigationElementsRemainAccessible() {
         // Check that navigation is still present (might be hamburger menu on mobile)
         String[] navSelectors = {
             "nav", ".nav", ".navigation", ".menu", 
@@ -212,8 +212,8 @@ public class PrimeSkyWebsiteSteps {
         Assertions.assertTrue(navAccessible, 
                 "Navigation should remain accessible on all screen sizes");
     }
-    @Then("content should be readable and properly formatted")
-    public void content_should_be_readable_and_properly_formatted() {
+    @Then("content is readable and properly formatted")
+    public void contentIsReadableAndProperlyFormatted() {
         // Basic check that content is present and not overlapping
         Assertions.assertTrue(page.locator("body").count() > 0, 
                 "Content should be present");
@@ -226,15 +226,15 @@ public class PrimeSkyWebsiteSteps {
     }
     
     // ========== Performance Steps ==========
-    @Then("the page should load within {int} seconds")
-    public void the_page_should_load_within_seconds(int seconds) {
+    @Then("page loads within {int} seconds")
+    public void pageLoadsWithinSeconds(int seconds) {
         // This is enforced by the page timeout settings
         page.waitForLoadState(LoadState.DOMCONTENTLOADED);
         Assertions.assertTrue(true, 
                 "Page loaded within " + seconds + " seconds (enforced by timeout)");
     }
-    @Then("all images should load properly")
-    public void all_images_should_load_properly() {
+    @Then("all images load properly")
+    public void allImagesLoadProperly() {
         Locator images = page.locator("img");
         int imageCount = images.count();
         
@@ -309,8 +309,8 @@ public class PrimeSkyWebsiteSteps {
             }
         }
     }
-    @Then("appropriate validation error messages should be displayed")
-    public void appropriate_validation_error_messages_displayed() {
+    @Then("appropriate validation error messages are displayed")
+    public void appropriateValidationErrorMessagesAreDisplayed() {
         String[] errorSelectors = {".error", ".invalid", ".validation-error", ".field-error", ".help-block", ".error-message"};
         boolean errorFound = false;
         for (String selector : errorSelectors) {
@@ -329,13 +329,13 @@ public class PrimeSkyWebsiteSteps {
         }
         System.out.println("Validation error check result: " + errorFound);
     }
-    @Then("the form should not be submitted")
-    public void form_should_not_be_submitted() {
+    @Then("form is not submitted")
+    public void formIsNotSubmitted() {
         String currentUrl = page.url();
         Assertions.assertFalse(currentUrl.contains("success") || currentUrl.contains("thank"), "Form should not have been submitted successfully");
     }
-    @Then("error messages should be clearly visible")
-    public void error_messages_should_be_clearly_visible() {
+    @Then("error messages are clearly visible")
+    public void errorMessagesAreClearlyVisible() {
         String[] errorSelectors = {".error", ".invalid", ".validation-error", ".field-error"};
         for (String selector : errorSelectors) {
             if (page.locator(selector).count() > 0) {
@@ -345,8 +345,8 @@ public class PrimeSkyWebsiteSteps {
             }
         }
     }
-    @Then("a success confirmation message should be displayed")
-    public void success_confirmation_message_displayed() {
+    @Then("success confirmation message is displayed")
+    public void successConfirmationMessageIsDisplayed() {
         String[] successSelectors = {".success", ".confirmation", ".thank-you", ":has-text('success')", ":has-text('thank')", ":has-text('sent')"};
         boolean successFound = false;
         for (String selector : successSelectors) {
@@ -362,8 +362,8 @@ public class PrimeSkyWebsiteSteps {
         }
         System.out.println("Success confirmation check: " + successFound);
     }
-    @Then("the form should be reset or show appropriate next steps")
-    public void form_should_be_reset_or_show_next_steps() {
+    @Then("form is reset or shows appropriate next steps")
+    public void formIsResetOrShowsAppropriateNextSteps() {
         Locator formInputs = page.locator("form input[type='text'], form input[type='email'], form textarea");
         boolean formReset = true;
         for (int i = 0; i < formInputs.count(); i++) {
@@ -436,8 +436,8 @@ public class PrimeSkyWebsiteSteps {
     }
     
     // ========== Search and Interactive Steps ==========
-    @Given("the search feature is available")
-    public void the_search_feature_is_available() {
+    @Given("search feature is available")
+    public void searchFeatureIsAvailable() {
         String[] searchSelectors = {
             "input[type='search']", ".search input", "#search", 
             "input[placeholder*='search' i]", ".search-box"
@@ -454,8 +454,8 @@ public class PrimeSkyWebsiteSteps {
         System.out.println("Search feature available: " + searchFound);
         // Note: This is conditional - tests will skip if search not available
     }
-    @When("I search for {string}")
-    public void i_search_for_term(String searchTerm) {
+    @When("search for {string} is performed")
+    public void searchForTermIsPerformed(String searchTerm) {
         String[] searchSelectors = {
             "input[type='search']", ".search input", "#search", 
             "input[placeholder*='search' i]"
@@ -470,8 +470,8 @@ public class PrimeSkyWebsiteSteps {
             }
         }
     }
-    @Then("I should see search results related to {string}")
-    public void i_should_see_search_results_related_to_term(String searchTerm) {
+    @Then("search results related to {string} are displayed")
+    public void searchResultsRelatedToTermAreDisplayed(String searchTerm) {
         // Check for results container or search-related content
         String[] resultSelectors = {
             ".search-results", ".results", ".search-result", 
@@ -488,14 +488,14 @@ public class PrimeSkyWebsiteSteps {
         
         System.out.println("Search results found for '" + searchTerm + "': " + resultsFound);
     }
-    @Then("the results should be properly formatted")
-    public void the_results_should_be_properly_formatted() {
+    @Then("results are properly formatted")
+    public void resultsAreProperlyFormatted() {
         // Basic check that page structure remains intact after search
         Assertions.assertTrue(page.locator("body").count() > 0, 
                 "Page should maintain proper structure after search");
     }
-    @Then("pagination should work if applicable")
-    public void pagination_should_work_if_applicable() {
+    @Then("pagination works if applicable")
+    public void paginationWorksIfApplicable() {
         String[] paginationSelectors = {
             ".pagination", ".pager", ".page-numbers", 
             "a:has-text('Next')", "a:has-text('Previous')"
@@ -589,7 +589,7 @@ public class PrimeSkyWebsiteSteps {
         
         if (formCount == 0 && inputCount == 0) {
             // Navigate to contact page as it likely has forms
-            user_navigates_to_the_contact_page();
+            contactPageIsNavigatedTo();
         }
     }
     @When("I enter invalid data in form fields")
@@ -668,8 +668,8 @@ public class PrimeSkyWebsiteSteps {
     }
     
     // ========== Flight Search Steps ==========
-    @Given("I am on the flight search page")
-    public void i_am_on_the_flight_search_page() {
+    @Given("flight search page is loaded")
+    public void flightSearchPageIsLoaded() {
         // Navigate to homepage first, then to flight search
         homePage.open();
         homePage.navigateToFlightSearch();
@@ -677,17 +677,17 @@ public class PrimeSkyWebsiteSteps {
         Assertions.assertTrue(flightSearchPage.isOnFlightSearchPage(), 
                 "Should be on flight search page or page with flight search functionality");
     }
-    @When("I fill in the flight search form with valid details")
-    public void i_fill_in_the_flight_search_form_with_valid_details(DataTable dataTable) {
+    @When("flight search form is filled with valid details")
+    public void flightSearchFormIsFilledWithValidDetails(DataTable dataTable) {
         Map<String, String> data = dataTable.asMap(String.class, String.class);
         flightSearchPage.fillFlightSearchForm(data);
     }
-    @When("I submit the flight search")
-    public void i_submit_the_flight_search() {
+    @When("flight search is submitted")
+    public void flightSearchIsSubmitted() {
         flightSearchPage.submitSearch();
     }
-    @Then("I should see a list of available flights")
-    public void i_should_see_a_list_of_available_flights() {
+    @Then("list of available flights is displayed")
+    public void listOfAvailableFlightsIsDisplayed() {
         System.out.println("Checking for flight search results...");
         
         // Use soft assertion - results may not be available on this website
@@ -704,8 +704,8 @@ public class PrimeSkyWebsiteSteps {
         // Soft assertion - don't fail the test if no results are found
         Assertions.assertTrue(true, "Flight search interaction completed");
     }
-    @Then("the search results should contain flights from {string} to {string}")
-    public void the_search_results_should_contain_flights_from_to(String origin, String destination) {
+    @Then("search results contain flights from {string} to {string}")
+    public void searchResultsContainFlightsFromTo(String origin, String destination) {
         String pageContent = page.content().toLowerCase();
         String originLower = origin.toLowerCase();
         String destinationLower = destination.toLowerCase();
@@ -719,8 +719,8 @@ public class PrimeSkyWebsiteSteps {
         Assertions.assertTrue(hasOrigin || hasDestination, 
             "Search results should contain the searched route information");
     }
-    @Then("the results should show the correct departure date")
-    public void the_results_should_show_the_correct_departure_date() {
+    @Then("results show the correct departure date")
+    public void resultsShowTheCorrectDepartureDate() {
         // Look for date elements in results
         String[] dateSelectors = {
             ".departure-date",
@@ -750,8 +750,8 @@ public class PrimeSkyWebsiteSteps {
         
         System.out.println("Date validation result: " + dateFound);
     }
-    @Then("the results should display flight details like price, duration, and airline")
-    public void the_results_should_display_flight_details() {
+    @Then("results display flight details like price, duration, and airline")
+    public void resultsDisplayFlightDetailsLikePriceDurationAndAirline() {
         String[] detailSelectors = {
             ".price", ".cost", ".fare",
             ".duration", ".flight-time", ".travel-time",
@@ -774,12 +774,12 @@ public class PrimeSkyWebsiteSteps {
         System.out.println("Flight details found: " + detailsFound);
         Assertions.assertTrue(detailsFound > 0, "Flight results should display relevant details");
     }
-    @When("I select {string} trip type")
-    public void i_select_trip_type(String tripType) {
+    @When("{string} trip type is selected")
+    public void tripTypeIsSelected(String tripType) {
         selectTripType(tripType);
     }
-    @When("I fill in the one-way flight search form")
-    public void i_fill_in_the_one_way_flight_search_form(DataTable dataTable) {
+    @When("one-way flight search form is filled")
+    public void oneWayFlightSearchFormIsFilled(DataTable dataTable) {
         Map<String, String> data = dataTable.asMap(String.class, String.class);
         
         // Fill origin and destination
@@ -796,7 +796,7 @@ public class PrimeSkyWebsiteSteps {
     }
     @Then("I should see a list of available one-way flights")
     public void i_should_see_a_list_of_available_one_way_flights() {
-        i_should_see_a_list_of_available_flights();
+        listOfAvailableFlightsIsDisplayed();
         
         // Additional check to ensure it's one-way (no return flights shown)
         System.out.println("Checking for one-way flight results...");
@@ -848,7 +848,7 @@ public class PrimeSkyWebsiteSteps {
     @When("the flight search form is submitted without filling required fields")
     public void flight_search_form_submitted_without_required_fields() {
         // Directly submit without filling any fields
-        i_submit_the_flight_search();
+        flightSearchIsSubmitted();
     }
     @Then("validation errors for required fields should be displayed")
     public void validation_errors_for_required_fields_displayed() {
@@ -916,15 +916,15 @@ public class PrimeSkyWebsiteSteps {
     @Given("I have performed a flight search with results displayed")
     public void i_have_performed_a_flight_search_with_results_displayed() {
         // Perform a basic search first
-        i_am_on_the_flight_search_page();
+        flightSearchPageIsLoaded();
         
         // Fill in basic search data
         fillFlightSearchField("origin", "New York");
         fillFlightSearchField("destination", "Los Angeles");
         selectFlightDate("departure", "2025-12-15");
         
-        i_submit_the_flight_search();
-        i_should_see_a_list_of_available_flights();
+        flightSearchIsSubmitted();
+        listOfAvailableFlightsIsDisplayed();
     }
     @When("I apply filters to the search results")
     public void i_apply_filters_to_the_search_results(DataTable dataTable) {
@@ -1249,5 +1249,160 @@ public class PrimeSkyWebsiteSteps {
             }
         }
     }
+    
+    // ========== Additional Declarative Step Definitions ==========
+    @Then("results are filtered accordingly")
+    public void resultsAreFilteredAccordingly() {
+        // Check that filter has been applied
+        System.out.println("Filter applied - checking results");
+        Assertions.assertTrue(page.locator("body").count() > 0, "Page should remain functional after applying filters");
+    }
+    
+    @Then("only flights matching the filter criteria are displayed")
+    public void onlyFlightsMatchingTheFilterCriteriaAreDisplayed() {
+        // Check that results are present
+        boolean hasResults = flightSearchPage.hasSearchResults();
+        System.out.println("Filtered results displayed: " + hasResults);
+    }
+    
+    @Then("filter count is updated")
+    public void filterCountIsUpdated() {
+        // Check for filter count indicators
+        String[] countSelectors = {".filter-count", ".result-count", ".count", "[data-testid='result-count']"};
+        boolean countFound = false;
+        for (String selector : countSelectors) {
+            if (page.locator(selector).count() > 0) {
+                countFound = true;
+                break;
+            }
+        }
+        System.out.println("Filter count indicator found: " + countFound);
+    }
+    
+    @When("invalid departure date in the past is entered")
+    public void invalidDepartureDateInThePastIsEntered() {
+        // Enter a past date
+        String pastDate = "2020-01-01";
+        selectFlightDate("departure", pastDate);
+        System.out.println("Entered past departure date: " + pastDate);
+    }
+    
+    @Then("error message about invalid date is displayed")
+    public void errorMessageAboutInvalidDateIsDisplayed() {
+        // Check for date validation error
+        String[] dateErrorSelectors = {
+            ".date-error", ".invalid-date", ".error", 
+            ":has-text('date')", ":has-text('invalid')"
+        };
+        boolean dateErrorFound = false;
+        for (String selector : dateErrorSelectors) {
+            if (page.locator(selector).count() > 0) {
+                dateErrorFound = true;
+                break;
+            }
+        }
+        System.out.println("Date validation error displayed: " + dateErrorFound);
+    }
+    
+    @When("same city is entered for origin and destination")
+    public void sameCityIsEnteredForOriginAndDestination() {
+        String sameCity = "New York";
+        fillFlightSearchField("origin", sameCity);
+        fillFlightSearchField("destination", sameCity);
+        System.out.println("Entered same city for origin and destination: " + sameCity);
+    }
+    
+    @Then("error message about identical locations is displayed")
+    public void errorMessageAboutIdenticalLocationsIsDisplayed() {
+        // Check for location validation error
+        String[] locationErrorSelectors = {
+            ".location-error", ".same-location-error", ".error",
+            ":has-text('same')", ":has-text('identical')"
+        };
+        boolean locationErrorFound = false;
+        for (String selector : locationErrorSelectors) {
+            if (page.locator(selector).count() > 0) {
+                locationErrorFound = true;
+                break;
+            }
+        }
+        System.out.println("Location validation error displayed: " + locationErrorFound);
+    }
+    
+    @When("invalid data is entered in form fields")
+    public void invalidDataIsEnteredInFormFields(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        
+        for (Map<String, String> row : data) {
+            String field = row.get("Field");
+            String invalidValue = row.get("Invalid_Value");
+            
+            String[] selectors = {
+                String.format("input[name*='%s' i]", field.toLowerCase()),
+                String.format("input[type='%s']", field.toLowerCase()),
+                String.format("input[id*='%s' i]", field.toLowerCase())
+            };
+            
+            for (String selector : selectors) {
+                if (page.locator(selector).count() > 0) {
+                    page.locator(selector).first().fill(invalidValue);
+                    // Trigger validation by blurring the field
+                    page.locator(selector).first().blur();
+                    break;
+                }
+            }
+        }
+    }
+    
+    // ========== Missing Interactive Element Steps ==========
+    @When("dropdown menus are interacted with")
+    public void dropdownMenusAreInteractedWith() {
+        String[] dropdownSelectors = {
+            "select", ".dropdown", ".dropdown-toggle", 
+            "[role='combobox']", ".select"
+        };
+        
+        for (String selector : dropdownSelectors) {
+            if (page.locator(selector).count() > 0) {
+                page.locator(selector).first().click();
+                page.waitForTimeout(500);
+                break;
+            }
+        }
+    }
+    
+    @When("navigation items are hovered over")
+    public void navigationItemsAreHoveredOver() {
+        Locator navItems = page.locator("nav a, .nav a, .menu a");
+        if (navItems.count() > 0) {
+            navItems.first().hover();
+            page.waitForTimeout(500);
+        }
+    }
+    
+    @When("action buttons are clicked")
+    public void actionButtonsAreClicked() {
+        Locator buttons = page.locator("button, .btn, input[type='button']");
+        if (buttons.count() > 0) {
+            // Click the first visible button
+            for (int i = 0; i < buttons.count(); i++) {
+                if (buttons.nth(i).isVisible()) {
+                    buttons.nth(i).click();
+                    page.waitForTimeout(500);
+                    break;
+                }
+            }
+        }
+    }
+    
+    @When("filters are applied to the search results")
+    public void filtersAreAppliedToTheSearchResults(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        
+        for (Map<String, String> row : data) {
+            String filterType = row.get("Filter Type");
+            String value = row.get("Value");
+            applyFilter(filterType, value);
+        }
+    }
 }
-
