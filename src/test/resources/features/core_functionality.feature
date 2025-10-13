@@ -5,22 +5,22 @@ Feature: PrimeSky Website Core Functionality
   So that tasks can be accomplished efficiently
 
   Background:
-    Given the user is on the PrimeSky homepage
+    Given PrimeSky homepage is loaded
 
   @page-load @high-priority
   Scenario: Verify homepage loads successfully
-    When the user navigates to the PrimeSky website
-    Then the page should load completely
-    And the page title should be displayed
-    And all critical page elements should be visible
-    And no JavaScript errors should be present
+    When PrimeSky website is navigated to
+    Then page loads completely
+    And page title is displayed
+    And all critical page elements are visible
+    And no JavaScript errors are present
 
   @navigation @high-priority
   Scenario Outline: Verify main navigation functionality
-    When the user clicks on the "<navigation_item>" in the main menu
-    Then the user should be navigated to the "<expected_page>" page
-    And the page should load within acceptable time
-    And the navigation item should be highlighted as active
+    When "<navigation_item>" navigation item is clicked in the main menu
+    Then "<expected_page>" page is navigated to
+    And page loads within acceptable time
+    And navigation item is highlighted as active
 
     Examples:
       | navigation_item | expected_page |
@@ -31,11 +31,11 @@ Feature: PrimeSky Website Core Functionality
 
   @responsive @medium-priority
   Scenario Outline: Verify responsive design functionality
-    Given the user is viewing the website on "<device_type>"
-    When the user resizes the browser to "<viewport_size>"
-    Then the page layout should adapt appropriately
-    And all navigation elements should remain accessible
-    And content should be readable and properly formatted
+    Given website is viewed on "<device_type>"
+    When browser is resized to "<viewport_size>"
+    Then page layout adapts appropriately
+    And all navigation elements remain accessible
+    And content is readable and properly formatted
 
     Examples:
       | device_type | viewport_size |
@@ -45,9 +45,9 @@ Feature: PrimeSky Website Core Functionality
 
   @performance @medium-priority
   Scenario: Verify page performance metrics
-    When the user navigates to the homepage
-    Then the page should load within 3 seconds
-    And all images should load properly
+    When homepage is navigated to
+    Then page loads within 3 seconds
+    And all images load properly
     And the page should be interactive within 5 seconds
     And there should be no console errors
 
