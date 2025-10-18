@@ -1,9 +1,10 @@
-
 package service;
 
 import pages.HomePage;
 import com.microsoft.playwright.*;
-// ...existing code...
+import io.cucumber.datatable.DataTable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Website Explorer for https://fdev.primesky.com/
@@ -29,7 +30,40 @@ public class PlaywrightService {
         }
     }
 
-    // ...existing code...
+    /**
+     * Performs a flight search using data from a Cucumber DataTable.
+     * Handles input validation, logging, error handling, and delegates to HomePage.
+     */
+    public static void searchForFlight(DataTable dataTable) {
+        Logger logger = LogManager.getLogger(PlaywrightService.class);
+        try {
+            if (dataTable == null || dataTable.asMaps().isEmpty()) {
+                throw new IllegalArgumentException("Flight search data table is empty or null");
+            }
+            // Only use the first row for this scenario
+            var row = dataTable.asMaps().get(0);
+            String from = row.getOrDefault("from", "");
+            String to = row.getOrDefault("to", "");
+            String departureDate = row.getOrDefault("departure date", "");
+            String returnDate = row.getOrDefault("return date", "");
+            String passengers = row.getOrDefault("passengers", "");
+            String flightClass = row.getOrDefault("class", "");
+            // Input validation
+            if (from.isBlank() || to.isBlank() || departureDate.isBlank() || returnDate.isBlank() || passengers.isBlank() || flightClass.isBlank()) {
+                throw new IllegalArgumentException("One or more flight search parameters are missing: " + row);
+            }
+            logger.info("Delegating flight search to HomePage: {}", row);
+            homePage.searchForFlight(from, to, departureDate, returnDate, passengers, flightClass);
+        } catch (Exception e) {
+            logger.error("Error in searchForFlight: {}", e.getMessage(), e);
+            try {
+                page.screenshot(new Page.ScreenshotOptions().setPath(java.nio.file.Paths.get("logs/playwrightservice_flight_search_failure.png")));
+            } catch (Exception ex) {
+                logger.error("Failed to capture screenshot in PlaywrightService: {}", ex.getMessage(), ex);
+            }
+            throw new RuntimeException("Failed to perform flight search: " + e.getMessage(), e);
+        }
+    }
 
     // ...existing code...
 }
