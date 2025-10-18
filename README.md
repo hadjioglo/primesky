@@ -238,6 +238,44 @@ page.screenshot(new Page.ScreenshotOptions()
     .setPath(Paths.get("target/screenshots/failure.png")));
 ```
 
+## 📄 Page Object Model (POM) Best Practices
+
+- Each page object class (e.g., `HomePage`, `ContactsPage`) encapsulates all UI interactions and assertions for its respective page.
+- Helper methods for UI actions (such as filling fields, clicking buttons, or waiting for elements) must be implemented as private methods within the relevant page object class.
+- Service classes (e.g., `PlaywrightService`) should only delegate actions to page objects and must not contain page-specific selectors or logic.
+- Step definitions must call service methods, which in turn delegate to page objects, ensuring clean separation of concerns.
+
+### Example: Modular Page Object Methods
+```java
+public class HomePage {
+    // ...existing code...
+    public void searchForFlight(...) {
+        ErrorHandlingUtil.runWithErrorHandling(() -> {
+            fillFromField(...);
+            fillToField(...);
+            // ...other helpers...
+            clickSearchButton();
+        }, "logs/flight_search_failure.png", logger, page, "Flight search failed");
+    }
+    private void fillFromField(String from) { /* ... */ }
+    private void fillToField(String to) { /* ... */ }
+    // ...other helpers...
+}
+```
+
+### Error Handling and Logging
+- All Playwright actions in page objects use `ErrorHandlingUtil.runWithErrorHandling` for consistent error handling, logging, and screenshot capture.
+- Assertions should include meaningful messages for easier debugging.
+
+### Workflow for Adding New Page Objects
+1. Create a dedicated class for each major page (e.g., `ContactsPage`, `SearchResultsPage`).
+2. Implement all UI interactions and assertions as methods within the page object.
+3. Use private helper methods for granular actions (e.g., filling a field, clicking a button).
+4. Ensure all Playwright actions are wrapped with error handling and logging.
+5. Delegate from service classes and step definitions to page objects only.
+
+---
+
 ## 🤝 Contributing
 
 1. Fork the repository
