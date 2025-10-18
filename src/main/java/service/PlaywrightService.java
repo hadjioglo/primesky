@@ -1,10 +1,10 @@
 package service;
 
-import pages.HomePage;
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.Page;
 import io.cucumber.datatable.DataTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import pages.HomePage;
 
 /**
  * Website Explorer for https://fdev.primesky.com/
@@ -36,7 +36,7 @@ public class PlaywrightService {
      */
     public static void searchForFlight(DataTable dataTable) {
         Logger logger = LogManager.getLogger(PlaywrightService.class);
-        try {
+        ErrorHandlingUtil.runWithErrorHandling(() -> {
             if (dataTable == null || dataTable.asMaps().isEmpty()) {
                 throw new IllegalArgumentException("Flight search data table is empty or null");
             }
@@ -54,15 +54,7 @@ public class PlaywrightService {
             }
             logger.info("Delegating flight search to HomePage: {}", row);
             homePage.searchForFlight(from, to, departureDate, returnDate, passengers, flightClass);
-        } catch (Exception e) {
-            logger.error("Error in searchForFlight: {}", e.getMessage(), e);
-            try {
-                page.screenshot(new Page.ScreenshotOptions().setPath(java.nio.file.Paths.get("logs/playwrightservice_flight_search_failure.png")));
-            } catch (Exception ex) {
-                logger.error("Failed to capture screenshot in PlaywrightService: {}", ex.getMessage(), ex);
-            }
-            throw new RuntimeException("Failed to perform flight search: " + e.getMessage(), e);
-        }
+        }, "logs/playwrightservice_flight_search_failure.png", logger, page, "Failed to perform flight search");
     }
 
     // ...existing code...
