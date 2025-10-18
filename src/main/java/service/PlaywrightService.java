@@ -5,6 +5,7 @@ import io.cucumber.datatable.DataTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pages.HomePage;
+import util.ErrorHandlingUtil;
 
 /**
  * Website Explorer for https://fdev.primesky.com/
@@ -15,6 +16,7 @@ public class PlaywrightService {
     private static final BrowserManager browserManager = BrowserManager.getInstance();
     private static final Page page = browserManager.getPage();
     private static final HomePage homePage = new HomePage(page);
+    private static final pages.ContactsPage contactsPage = new pages.ContactsPage(page);
 
     /**
      * Loads the PrimeSky homepage using HomePage page object.
@@ -55,6 +57,22 @@ public class PlaywrightService {
             logger.info("Delegating flight search to HomePage: {}", row);
             homePage.searchForFlight(from, to, departureDate, returnDate, passengers, flightClass);
         }, "logs/playwrightservice_flight_search_failure.png", logger, page, "Failed to perform flight search");
+    }
+
+    /**
+     * Navigates to the Contacts page using ContactsPage page object.
+     * Handles navigation, waits, and error handling.
+     */
+    public static void navigateToContactsPage() {
+        contactsPage.load();
+    }
+
+    /**
+     * Asserts that the Contacts page is displayed using ContactsPage page object.
+     * Handles assertion and error handling.
+     */
+    public static void assertContactsPageDisplayed() {
+        contactsPage.assertLoaded();
     }
 
     // ...existing code...

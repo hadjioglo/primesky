@@ -1,6 +1,9 @@
 package service;
 
 import com.microsoft.playwright.*;
+
+import util.ErrorHandlingUtil;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

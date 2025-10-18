@@ -1,4 +1,4 @@
-package service;
+package util;
 
 import com.microsoft.playwright.Page;
 import org.apache.logging.log4j.Logger;

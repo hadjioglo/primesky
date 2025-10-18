@@ -3,7 +3,9 @@ package pages;
 import com.microsoft.playwright.Page;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import service.ErrorHandlingUtil;
+
+import util.ErrorHandlingUtil;
+import util.PageInteractionUtil;
 
 public class HomePage {
     private static final Logger logger = LogManager.getLogger(HomePage.class);
@@ -46,44 +48,98 @@ public class HomePage {
 
     // Helper methods for each UI interaction
     private void fillFromField(String from) {
-        String fromSelector = "input[name='port_from']";
-        page.waitForSelector(fromSelector);
-        page.fill(fromSelector, from);
-        String airportSuggestionSelector = "div.port_loc[data-code]";
-        page.waitForSelector(airportSuggestionSelector);
-        page.click(airportSuggestionSelector + "[data-code='" + from + "']");
-        logger.debug("Filled 'from' field with: {}", from);
+        String[] fromSelectors = {
+            "input[data-testid='from']", "input[name*='from']", "input[id*='from']", "input[class*='from']", "input[placeholder*='From']"
+        };
+        boolean filled = java.util.Arrays.stream(fromSelectors)
+            .anyMatch(selector -> PageInteractionUtil.interactWithElement(
+                page, logger, selector, from,
+                PageInteractionUtil.ElementAction.FILL,
+                "logs/fill_from_failure.png",
+                "Failed to fill 'from' field"
+            ));
+        if (!filled) {
+            logger.error("Could not fill 'from' field with any selector");
+        }
     }
 
     private void fillToField(String to) {
-        String toSelector = "input[name='port_to']";
-        page.waitForSelector(toSelector);
-        page.fill(toSelector, to);
-        String airportSuggestionSelector = "div.port_loc[data-code]";
-        page.waitForSelector(airportSuggestionSelector);
-        page.click(airportSuggestionSelector + "[data-code='" + to + "']");
-        logger.debug("Filled 'to' field with: {}", to);
+        String[] toSelectors = {
+            "input[data-testid='to']", "input[name*='to']", "input[id*='to']", "input[class*='to']", "input[placeholder*='To']"
+        };
+        boolean filled = java.util.Arrays.stream(toSelectors)
+            .anyMatch(selector -> PageInteractionUtil.interactWithElement(
+                page, logger, selector, to,
+                PageInteractionUtil.ElementAction.FILL,
+                "logs/fill_to_failure.png",
+                "Failed to fill 'to' field"
+            ));
+        if (!filled) {
+            logger.error("Could not fill 'to' field with any selector");
+        }
     }
 
     private void fillDates(String departureDate, String returnDate) {
-        page.fill("input[placeholder*='Dates']", departureDate + " - " + returnDate);
-        logger.debug("Filled dates: {} - {}", departureDate, returnDate);
+        String[] dateSelectors = {
+            "input[name*='date_departure']", "input[id*='date_departure']", "input[data-testid*='date_departure']", "input[placeholder*='Dates']"
+        };
+        boolean filled = java.util.Arrays.stream(dateSelectors)
+            .anyMatch(selector -> PageInteractionUtil.interactWithElement(
+                page, logger, selector, departureDate,
+                PageInteractionUtil.ElementAction.FILL,
+                "logs/fill_date_failure.png",
+                "Failed to fill departure date"
+            ));
+        if (!filled) {
+            logger.error("Could not fill departure date with any selector");
+        }
     }
 
     private void fillPassengers(String passengers) {
-        page.fill("input[placeholder*='Travelers']", passengers);
-        logger.debug("Filled passengers: {}", passengers);
+        String[] passengerSelectors = {
+            "input[name*='passenger']", "input[id*='passenger']", "input[data-testid*='passenger']", "input[placeholder*='Travelers']", "input[name*='adult']"
+        };
+        boolean filled = java.util.Arrays.stream(passengerSelectors)
+            .anyMatch(selector -> PageInteractionUtil.interactWithElement(
+                page, logger, selector, passengers,
+                PageInteractionUtil.ElementAction.FILL,
+                "logs/fill_passengers_failure.png",
+                "Failed to fill passengers"
+            ));
+        if (!filled) {
+            logger.error("Could not fill passengers with any selector");
+        }
     }
 
     private void fillClass(String flightClass) {
-        page.fill("input[placeholder*='Class']", flightClass);
-        logger.debug("Filled class: {}", flightClass);
+        String[] classSelectors = {
+            "input[name*='class']", "input[id*='class']", "input[data-testid*='class']", "input[placeholder*='Class']"
+        };
+        boolean filled = java.util.Arrays.stream(classSelectors)
+            .anyMatch(selector -> PageInteractionUtil.interactWithElement(
+                page, logger, selector, flightClass,
+                PageInteractionUtil.ElementAction.FILL,
+                "logs/fill_class_failure.png",
+                "Failed to fill class"
+            ));
+        if (!filled) {
+            logger.error("Could not fill class with any selector");
+        }
     }
 
     private void clickSearchButton() {
-        String searchButtonSelector = "button:has-text('SEARCH FLIGHT'), .search-flight__btn";
-        page.waitForSelector(searchButtonSelector);
-        page.click(searchButtonSelector);
-        logger.debug("Clicked 'SEARCH FLIGHT' button");
+        String[] buttonSelectors = {
+            "button:has-text('SEARCH FLIGHT')", ".search-flight__btn", "button[type='submit']", "button[data-testid*='search']"
+        };
+        boolean clicked = java.util.Arrays.stream(buttonSelectors)
+            .anyMatch(selector -> PageInteractionUtil.interactWithElement(
+                page, logger, selector, null,
+                PageInteractionUtil.ElementAction.CLICK,
+                "logs/click_search_failure.png",
+                "Failed to click search button"
+            ));
+        if (!clicked) {
+            logger.error("Could not click search button with any selector");
+        }
     }
 }
