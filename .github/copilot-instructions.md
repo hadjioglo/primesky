@@ -79,6 +79,36 @@ public static void loadPrimeSkyHomepage() {
 
 **Always use page objects for all page-specific actions. Never mix navigation, waits, or assertions directly in service or step definition classes.**
 
+# Error Handling Standard for Playwright Actions
+
+## Generic Error Handling Utility
+
+All Playwright actions in page objects and service classes **must use the ErrorHandlingUtil utility** for error handling, logging, and screenshot capture. This removes repetitive try-catch blocks and ensures:
+- Consistent error handling
+- Automatic screenshot capture on failure
+- Comprehensive logging
+- Maintainable and readable code
+
+### Usage Pattern
+
+Wrap Playwright actions in:
+```java
+ErrorHandlingUtil.runWithErrorHandling(() -> {
+    // Playwright actions here
+}, "logs/<context>_failure.png", logger, page, "<Error message>");
+```
+
+### Example
+```java
+public void searchForFlight(...) {
+    ErrorHandlingUtil.runWithErrorHandling(() -> {
+        // Playwright actions
+    }, "logs/flight_search_failure.png", logger, page, "Flight search failed");
+}
+```
+
+**Apply this pattern everywhere Playwright actions are performed.**
+
 ## 🛠️ Framework-Specific Implementation Patterns
 
 ## 🧪 Testing Guidelines and Patterns
@@ -282,4 +312,20 @@ All browser/page logic (navigation, waits, assertions, logging, error handling, 
 14. **Documentation**  
     - Keep your README and framework documentation up to date, especially regarding setup, running tests, and troubleshooting.
 
----
+# Playwright Wait Strategy
+
+- **Default Timeout Usage**: Always use Playwright's default timeout for `waitForSelector` and other wait operations unless a specific scenario requires a custom timeout. This leverages Playwright's built-in waiting logic and avoids unnecessary hardcoding.
+- **Custom Timeout**: Only override the default timeout for elements known to be slow or flaky, and document the reason for the override.
+- **Maintainability**: Avoid using repeated hardcoded timeout values (e.g., `new Page.WaitForSelectorOptions().setTimeout(10000)`) throughout the codebase. If a custom timeout is needed, use a named constant or parameterize the timeout for flexibility.
+- **Code Example**:
+
+```java
+// Use default timeout
+page.waitForSelector(searchButtonSelector);
+
+// If custom timeout is needed, use a named constant or parameter
+private static final int SLOW_ELEMENT_TIMEOUT_MS = 20000;
+page.waitForSelector(slowElementSelector, new Page.WaitForSelectorOptions().setTimeout(SLOW_ELEMENT_TIMEOUT_MS));
+```
+
+- **Rationale**: This approach improves maintainability, reduces duplication, and ensures context-aware waiting. Timeout changes can be made centrally, and Playwright's auto-waiting features are fully utilized.

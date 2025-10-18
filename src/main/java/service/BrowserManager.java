@@ -32,8 +32,8 @@ public class BrowserManager {
     }
 
     private void setupBrowser() {
-        logger.info("=== Setting up Playwright browser (singleton) ===");
-        try {
+        ErrorHandlingUtil.runWithErrorHandling(() -> {
+            logger.info("=== Setting up Playwright browser (singleton) ===");
             if (playwright == null) {
                 playwright = Playwright.create();
             }
@@ -49,21 +49,38 @@ public class BrowserManager {
             if (page == null) {
                 page = context.newPage();
             }
-        } catch (Exception e) {
-            logger.error("Error during browser setup: {}", e.getMessage(), e);
-        }
+        }, "logs/browser_setup_failure.png", logger, page, "Error during browser setup");
     }
 
-    public Playwright getPlaywright() { return playwright; }
-    public Browser getBrowser() { return browser; }
-    public BrowserContext getContext() { return context; }
-    public Page getPage() { return page; }
+    public Playwright getPlaywright() {
+        return playwright;
+    }
+
+    public Browser getBrowser() {
+        return browser;
+    }
+
+    public BrowserContext getContext() {
+        return context;
+    }
+
+    public Page getPage() {
+        return page;
+    }
 
     public void cleanup() {
-        logger.info("=== Cleaning up browser resources ===");
-        if (context != null) { context.close(); }
-        if (browser != null) { browser.close(); }
-        if (playwright != null) { playwright.close(); }
-        logger.info("Browser resources cleaned up!");
+        ErrorHandlingUtil.runWithErrorHandling(() -> {
+            logger.info("=== Cleaning up browser resources ===");
+            if (context != null) {
+                context.close();
+            }
+            if (browser != null) {
+                browser.close();
+            }
+            if (playwright != null) {
+                playwright.close();
+            }
+            logger.info("Browser resources cleaned up!");
+                }, "logs/browser_cleanup_failure.png", logger, (page != null && !page.isClosed() ? page : null), "Error during browser cleanup");
     }
 }

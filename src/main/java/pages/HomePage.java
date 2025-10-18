@@ -1,9 +1,9 @@
 package pages;
 
 import com.microsoft.playwright.Page;
-import java.nio.file.Paths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import service.ErrorHandlingUtil;
 
 public class HomePage {
     private static final Logger logger = LogManager.getLogger(HomePage.class);
@@ -28,51 +28,62 @@ public class HomePage {
 
     /**
      * Performs a flight search using the provided parameters.
-     * Uses multiple selector strategies and explicit waits for robustness.
+     * Delegates each UI interaction to dedicated helper methods for maintainability.
      * Captures screenshot and logs errors on failure.
      */
     public void searchForFlight(String from, String to, String departureDate, String returnDate, String passengers, String flightClass) {
-        try {
+        ErrorHandlingUtil.runWithErrorHandling(() -> {
             logger.info("Starting flight search: from={}, to={}, departureDate={}, returnDate={}, passengers={}, class={}", from, to, departureDate, returnDate, passengers, flightClass);
-            // Wait for and fill 'from' field
-            String fromSelector = "input[name='port_from']";
-            page.waitForSelector(fromSelector, new Page.WaitForSelectorOptions().setTimeout(10000));
-            page.fill(fromSelector, from);
-            logger.info("Filled 'From' field with: {}", from);
-            // Wait for airport suggestion and select
-            String airportSuggestionSelector = "div.port_loc[data-code]";
-            page.waitForSelector(airportSuggestionSelector, new Page.WaitForSelectorOptions().setTimeout(10000));
-            page.click(airportSuggestionSelector + "[data-code='" + from + "']");
-            logger.info("Selected airport suggestion for 'From': {}", from);
-            // Fill 'to' field
-            String toSelector = "input[name='port_to']";
-            page.waitForSelector(toSelector, new Page.WaitForSelectorOptions().setTimeout(10000));
-            page.fill(toSelector, to);
-            logger.info("Filled 'To' field with: {}", to);
-            // Wait for airport suggestion and select
-            page.waitForSelector(airportSuggestionSelector, new Page.WaitForSelectorOptions().setTimeout(10000));
-            page.click(airportSuggestionSelector + "[data-code='" + to + "']");
-            logger.info("Selected airport suggestion for 'To': {}", to);
-            // Fill departure and return dates
-            page.fill("input[placeholder*='Dates']", departureDate + " - " + returnDate);
-            logger.info("Filled dates: {} - {}", departureDate, returnDate);
-            // Fill passengers
-            page.fill("input[placeholder*='Travelers']", passengers);
-            logger.info("Filled passengers: {}", passengers);
-            // Fill class
-            page.fill("input[placeholder*='Class']", flightClass);
-            logger.info("Filled class: {}", flightClass);
-            // Click 'SEARCH FLIGHT' button
-            String searchButtonSelector = "button:has-text('SEARCH FLIGHT'), .search-flight__btn";
-            page.waitForSelector(searchButtonSelector, new Page.WaitForSelectorOptions().setTimeout(10000));
-            page.click(searchButtonSelector);
-            logger.info("Clicked 'SEARCH FLIGHT' button");
-        } catch (Exception e) {
-            logger.error("Error during flight search: {}", e.getMessage(), e);
-            String screenshotPath = "logs/flight_search_failure.png";
-            page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get(screenshotPath)));
-            logger.info("Screenshot captured at: {}", screenshotPath);
-            throw new RuntimeException("Flight search failed: " + e.getMessage(), e);
-        }
+            fillFromField(from);
+            fillToField(to);
+            fillDates(departureDate, returnDate);
+            fillPassengers(passengers);
+            fillClass(flightClass);
+            clickSearchButton();
+            logger.info("Flight search completed for: from={}, to={}, departureDate={}, returnDate={}, passengers={}, class={}", from, to, departureDate, returnDate, passengers, flightClass);
+        }, "logs/flight_search_failure.png", logger, page, "Flight search failed");
+    }
+
+    // Helper methods for each UI interaction
+    private void fillFromField(String from) {
+        String fromSelector = "input[name='port_from']";
+        page.waitForSelector(fromSelector);
+        page.fill(fromSelector, from);
+        String airportSuggestionSelector = "div.port_loc[data-code]";
+        page.waitForSelector(airportSuggestionSelector);
+        page.click(airportSuggestionSelector + "[data-code='" + from + "']");
+        logger.debug("Filled 'from' field with: {}", from);
+    }
+
+    private void fillToField(String to) {
+        String toSelector = "input[name='port_to']";
+        page.waitForSelector(toSelector);
+        page.fill(toSelector, to);
+        String airportSuggestionSelector = "div.port_loc[data-code]";
+        page.waitForSelector(airportSuggestionSelector);
+        page.click(airportSuggestionSelector + "[data-code='" + to + "']");
+        logger.debug("Filled 'to' field with: {}", to);
+    }
+
+    private void fillDates(String departureDate, String returnDate) {
+        page.fill("input[placeholder*='Dates']", departureDate + " - " + returnDate);
+        logger.debug("Filled dates: {} - {}", departureDate, returnDate);
+    }
+
+    private void fillPassengers(String passengers) {
+        page.fill("input[placeholder*='Travelers']", passengers);
+        logger.debug("Filled passengers: {}", passengers);
+    }
+
+    private void fillClass(String flightClass) {
+        page.fill("input[placeholder*='Class']", flightClass);
+        logger.debug("Filled class: {}", flightClass);
+    }
+
+    private void clickSearchButton() {
+        String searchButtonSelector = "button:has-text('SEARCH FLIGHT'), .search-flight__btn";
+        page.waitForSelector(searchButtonSelector);
+        page.click(searchButtonSelector);
+        logger.debug("Clicked 'SEARCH FLIGHT' button");
     }
 }
