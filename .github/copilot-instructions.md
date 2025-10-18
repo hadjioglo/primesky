@@ -1,9 +1,11 @@
 # GitHub Copilot Instructions for PrimeSky Test Automation Framework
 
 ## 🎯 Project Overview
+
 This is a **comprehensive test automation framework** using **Java 18**, **Playwright 1.44.0**, **Cucumber 7.15.0**, and **Maven** for end-to-end web application testing of the PrimeSky website. The project focuses on **behavior-driven development (BDD)** and **robust web automation** with advanced error handling and cross-browser support.
 
 ### Key Technologies & Versions
+
 - **Java 18** - Primary programming language (verified working)
 - **Playwright 1.44.0** - Modern browser automation framework
 - **Cucumber 7.15.0** - BDD testing framework with Gherkin syntax
@@ -11,6 +13,7 @@ This is a **comprehensive test automation framework** using **Java 18**, **Playw
 - **Maven 3.9.9** - Build automation and dependency management
 
 ### Project Goals & Focus Areas
+
 - Create maintainable, readable test automation scripts
 - Implement BDD practices for business-readable test scenarios
 - Handle complex web UI interactions including hidden elements
@@ -21,284 +24,111 @@ This is a **comprehensive test automation framework** using **Java 18**, **Playw
 ## 📁 File Organization and Architecture
 
 ### Directory Structure
-```
-src/test/
-├── java/
-│   ├── steps/           # Cucumber step definitions
-│   │   ├── PrimeSkyWebsiteSteps.java
-│   │   └── PrimeSkyAdvancedSteps.java
-│   ├── runner/          # Test runners for different test suites
-│   │   ├── PrimeSkyTestRunner.java
-│   │   └── FlightSearchTestRunner.java
-│   ├── pages/           # Page Object Model classes
-│   │   ├── BasePage.java
-│   │   ├── HomePage.java
-│   │   ├── ContactPage.java
-│   │   └── FlightSearchPage.java
-│   └── exploration/     # Exploratory testing utilities
-│       └── WebsiteExplorer.java
-└── resources/
-    └── features/        # Cucumber feature files
-        ├── core_functionality.feature
-        ├── user_interactions.feature
-        └── primesky_exploration.feature
-```
 
 ### File Naming Conventions
-- **Feature files**: `{functionality}.feature` (e.g., `user_interactions.feature`)
-- **Step definitions**: `{FeatureName}Steps.java` (e.g., `PrimeSkyWebsiteSteps.java`)
-- **Test runners**: `{TestSuite}TestRunner.java` (e.g., `FlightSearchTestRunner.java`)
-- **Page objects**: `{PageName}Page.java` (e.g., `ContactPage.java`)
-- **Constants**: Use UPPER_SNAKE_CASE for static final variables
+
+-
 
 ## 💻 Coding Standards and Best Practices
 
 ### Java Code Standards
+
 - **Package Structure**: Follow Maven standard structure (`src/test/java/{package}`)
-- **Class Naming**: 
+- **Class Naming**:
+
   - Step definitions: `{FeatureName}Steps.java`
   - Test runners: `{TestType}TestRunner.java`
-  - Page objects: `{PageName}Page.java`
+
 - **Method Naming**: Use descriptive camelCase names reflecting the action
 - **Indentation**: 4 spaces (no tabs)
-- **Error Handling**: Always implement try-catch blocks with meaningful error messages
-- **Logging**: Use `System.out.println()` for debugging and status messages
 
 ### Cucumber BDD Conventions
+
 - **Feature Files**: Use descriptive names and clear business language
 - **Scenario Naming**: Start with action verbs and be descriptive
-- **Step Definitions**: Use present tense and active voice
+- **Step Definitions**: Use Passive Voice without "I" or "we". ex: "User is on the login page", "And page title is displayed"
 - **Tags**: Use `@{category}` for grouping (e.g., `@flight-search`, `@high-priority`)
 - **Given-When-Then**: Follow BDD structure strictly
 
 ### Playwright Implementation Standards
+
 - **Selectors**: Prefer stable selectors (data-testid > id > class > text)
 - **Waits**: Always use explicit waits instead of fixed sleeps
 - **Screenshots**: Capture screenshots on failures for debugging
-- **Browser Management**: Use singleton pattern for browser instances
+- **Browser Management**: Use a dedicated `BrowserManager` singleton class for Playwright browser lifecycle management. All browser, context, and page instances must be managed through this class for modularity and maintainability.
+- **Page Interactions**: Use Page Object Model (POM) for all page interactions. Each web page should have a dedicated class (e.g., `HomePage`) encapsulating navigation, assertions, and UI actions. Service classes (e.g., `PlaywrightService`) must delegate page-specific logic to these page objects, ensuring maintainability and separation of concerns.
+
+#### Page Object Model Example
+
+```java
+// HomePage.java
+public class HomePage {
+  private final Page page;
+  public HomePage(Page page) { this.page = page; }
+  public void load() { /* navigation logic */ }
+  public void assertLoaded() { /* assertion logic */ }
+}
+
+// PlaywrightService.java
+private static final HomePage homePage = new HomePage(page);
+public static void loadPrimeSkyHomepage() {
+  homePage.load();
+  homePage.assertLoaded();
+}
+```
+
+**Always use page objects for all page-specific actions. Never mix navigation, waits, or assertions directly in service or step definition classes.**
 
 ## 🛠️ Framework-Specific Implementation Patterns
-
-### Cucumber Step Definition Patterns
-```java
-@Given("User on the {string} page")
-public void userOnThePage(String pageName) {
-    System.out.println("Navigating to " + pageName + " page");
-    // Implementation with error handling
-    try {
-        // Navigation logic
-        System.out.println("Successfully navigated to " + pageName);
-    } catch (Exception e) {
-        System.out.println("Failed to navigate: " + e.getMessage());
-        throw e;
-    }
-}
-
-@When("User fill in the {string} field with {string}")
-public void userFillsInTheFieldWith(String fieldName, String value) {
-    System.out.println("Filling " + fieldName + " with: " + value);
-    // Implementation with multiple selector strategies
-}
-
-@Then("User should see {string}")
-public void userShouldSee(String expectedText) {
-    // Assertion with proper wait conditions
-    Assertions.assertTrue(condition, "Expected to see: " + expectedText);
-}
-```
-
-### Page Object Model Pattern
-```java
-public class HomePage extends BasePage {
-    private static final String HOME_URL = "/";
-    
-    // Locators
-    private final String MAIN_CONTENT = "main, .main-content, .container";
-    private final String NAVIGATION_MENU = "nav, .nav, .menu";
-    
-    public HomePage(Page page) {
-        super(page);
-    }
-    
-    public void open() {
-        System.out.println("Opening homepage");
-        navigateTo(HOME_URL);
-        waitForPageLoad();
-    }
-    
-    public boolean isOnHomePage() {
-        return isElementVisible(MAIN_CONTENT) && 
-               page.url().contains("primesky.com");
-    }
-}
-```
-
-### Advanced Element Interaction Patterns
-
-#### Hidden Element Handling (Critical for PrimeSky)
-```java
-private void fillField(String selector, String value) {
-    System.out.println("Attempting to fill field with selector: " + selector);
-    Locator element = page.locator(selector);
-    
-    try {
-        // Check if element is hidden
-        if (element.getAttribute("hidden") != null || !element.isVisible()) {
-            System.out.println("Element is hidden, using JavaScript execution");
-            String jsScript = "arguments[0].value = '" + value + "'; " +
-                            "arguments[0].dispatchEvent(new Event('change'));";
-            element.evaluate(jsScript);
-        } else {
-            System.out.println("Element is visible, using standard fill");
-            element.fill(value);
-        }
-        System.out.println("Successfully filled field with: " + value);
-    } catch (PlaywrightException e) {
-        System.out.println("Failed to fill field: " + e.getMessage());
-        throw e;
-    }
-}
-```
-
-#### Multiple Selector Strategy (Robust Element Detection)
-```java
-private Locator findElementWithFallback(String fieldType) {
-    String[] selectors = {
-        "[data-testid='" + fieldType + "']",
-        "input[name*='" + fieldType + "']",
-        "input[id*='" + fieldType + "']",
-        "input[placeholder*='" + fieldType + "']"
-    };
-    
-    for (String selector : selectors) {
-        System.out.println("Trying selector: " + selector);
-        Locator elements = page.locator(selector);
-        if (elements.count() > 0) {
-            System.out.println("Found element with selector: " + selector);
-            return elements.first();
-        }
-    }
-    
-    throw new RuntimeException("Could not find element for: " + fieldType);
-}
-```
-
-#### Comprehensive Error Handling Pattern
-```java
-try {
-    // Primary action
-    element.click();
-    System.out.println("Successfully clicked element");
-} catch (PlaywrightException e) {
-    System.out.println("Primary click failed: " + e.getMessage());
-    
-    // Fallback strategy
-    try {
-        element.evaluate("arguments[0].click()");
-        System.out.println("JavaScript click successful");
-    } catch (Exception fallbackError) {
-        System.out.println("All click strategies failed");
-        // Capture screenshot for debugging
-        captureDebugScreenshot("click_failure");
-        throw new RuntimeException("Could not click element: " + e.getMessage());
-    }
-}
-```
-
-### Test Data Management Patterns
-```java
-// Using DataTable for structured test data
-@When("all required fields are filled with valid data")
-public void fill_required_fields(DataTable dataTable) {
-    List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
-    for (Map<String, String> row : data) {
-        String field = row.get("Field");
-        String value = row.get("Value");
-        fillFieldWithStrategy(field, value);
-    }
-}
-```
 
 ## 🧪 Testing Guidelines and Patterns
 
 ### BDD Scenario Writing Standards
+
 ```gherkin
 # Good scenario structure
 @flight-search @high-priority
 Scenario: Search for flights with valid criteria
-  Given the flight search page is open
-  When the flight search form is filled with valid details
-    | Field           | Value       |
-    | Origin          | New York    |
-    | Destination     | Los Angeles |
-    | Departure Date  | 2025-12-15  |
-    | Return Date     | 2025-12-22  |
-    | Passengers      | 2           |
-    | Trip Type       | Round Trip  |
-  And the flight search is submitted
-  Then a list of available flights should be displayed
-  And the search results should contain flights from "New York" to "Los Angeles"
-  And the results should show the correct departure date
+Given PrimeSky homepage is loaded
+When user searches for the flight
+| from   | to       | departure date | return date | passengers | class |
+| London | New-York | 2026-02-15     | 2026-02-25  | 1          | E     |
+Then flight results are displayed
+And the search results should contain flights from "New York" to "Los Angeles"
+And the results should show the correct departure date
 ```
 
 ### Test Execution Patterns
+
 ```java
 // Test Runner Configuration
-@Suite
-@IncludeEngines("cucumber")
-@SelectClasspathResource("features")
-@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = 
-    "pretty," +
-    "html:target/cucumber-reports.html," +
-    "json:target/cucumber-reports.json," +
-    "junit:target/cucumber-reports.xml"
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/resources/features",
+        glue = "steps",
+        tags = "@Run and not @Manual",
+        plugin = {},
+        stepNotifications = true
 )
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "steps")
-public class PrimeSkyTestRunner {
-    // Annotations do all the work
+public class RunnerTest {
 }
 ```
 
 ### Debugging and Logging Patterns
-```java
-// Enhanced logging for troubleshooting
-System.out.println("=== Starting " + scenarioName + " ===");
-System.out.println("Attempting to fill " + fieldType + " with: " + value);
-System.out.println("Found " + elements.count() + " elements with selector: " + selector);
-System.out.println("Current page URL: " + page.url());
-System.out.println("Page title: " + page.title());
-
-// Screenshot capture for debugging
-private void captureDebugScreenshot(String context) {
-    String timestamp = String.valueOf(System.currentTimeMillis());
-    String filename = String.format("debug_%s_%s.png", context, timestamp);
-    Path screenshotPath = Paths.get("target/screenshots/" + filename);
-    page.screenshot(new Page.ScreenshotOptions().setPath(screenshotPath));
-    System.out.println("Debug screenshot saved: " + filename);
-}
-```
 
 ## 🎯 Project-Specific Considerations
 
 ### PrimeSky Website Characteristics
-- **Hidden Form Fields**: Many form elements use `hidden` attribute requiring JavaScript interaction
-- **Dynamic Content**: Website uses modern UI patterns that may require special handling
-- **Flight Search**: Complex form interactions with date pickers and multi-step processes
-- **Contact Forms**: Multiple validation scenarios and error message handling
-- **Navigation**: Dynamic menu systems with hover effects
 
 ### Known Issues and Solutions
-- **TimeoutError on Hidden Elements**: Use JavaScript execution for hidden form fields
-- **Date Field Interactions**: Implement special handling for date inputs that may be hidden
-- **Form Submission**: Multiple button detection strategies due to varying implementations
-- **Selector Specificity**: Use multiple fallback selectors for robust element detection
 
 ### Test Environment Configuration
+
 ```java
 // Base configuration for PrimeSky testing
 private static final String BASE_URL = "https://fdev.primesky.com/";
 private static final int DEFAULT_TIMEOUT = 30000; // 30 seconds
-private static final boolean HEADLESS_MODE = true; // Set to false for debugging
+private static final boolean HEADLESS_MODE = false; // Set to false for debugging
 
 // Browser setup with PrimeSky optimizations
 browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
@@ -312,6 +142,7 @@ context = browser.newContext(new Browser.NewContextOptions()
 ## 🚀 Development Workflow Guidelines
 
 ### When Creating New Tests
+
 1. **Start with Feature File**: Write readable BDD scenarios first
 2. **Generate Step Definitions**: Create corresponding step definitions with proper error handling
 3. **Implement Robust Selectors**: Use multiple selector strategies
@@ -320,22 +151,23 @@ context = browser.newContext(new Browser.NewContextOptions()
 6. **Test Cross-Browser**: Verify functionality across different browsers
 
 ### When Fixing Test Failures
+
 1. **Analyze the Error**: Understand the root cause (element not found, timeout, etc.)
-2. **Implement JavaScript Fallbacks**: For hidden or complex UI elements
-3. **Add Multiple Selector Strategies**: Increase element detection reliability
-4. **Enhance Error Handling**: Provide graceful degradation
-5. **Update Documentation**: Document any special handling requirements
+2. **Add Multiple Selector Strategies**: Increase element detection reliability
+3. **Enhance Error Handling**: Provide graceful degradation
+4. **Update Documentation**: Document any special handling requirements
 
 ### Code Generation Guidelines
+
 When generating new code, always include:
-- Comprehensive error handling with try-catch blocks
-- Detailed logging statements for debugging
+
 - Multiple selector strategies for element detection
 - Screenshot capture on failures
 - Meaningful assertion messages
 - Proper wait conditions instead of fixed sleeps
 
 ### Maven Commands for Development
+
 ```bash
 # Build and test
 mvn clean compile test-compile
@@ -356,6 +188,7 @@ mvn test -DskipTests=false
 ## 📝 Code Quality Standards
 
 ### Required Elements in Every Test Method
+
 1. **Clear method documentation**
 2. **Input parameter validation**
 3. **Comprehensive error handling**
@@ -365,6 +198,7 @@ mvn test -DskipTests=false
 7. **Screenshot capture on failure**
 
 ### Forbidden Practices
+
 - ❌ Never use `Thread.sleep()` - use explicit waits
 - ❌ Never use hardcoded selectors without fallbacks
 - ❌ Never skip error handling in step definitions
@@ -372,7 +206,9 @@ mvn test -DskipTests=false
 - ❌ Never use brittle selectors (index-based, xpath with position)
 
 ## 🎉 Success Criteria
+
 Every piece of generated code should:
+
 - ✅ Follow the established patterns and conventions
 - ✅ Include comprehensive error handling
 - ✅ Provide detailed logging for debugging
@@ -385,3 +221,65 @@ Every piece of generated code should:
 ---
 
 **Remember**: Always prioritize **maintainability**, **readability**, and **robust error handling** when creating or modifying test code. The framework is designed to handle complex web applications like PrimeSky with advanced UI patterns and hidden elements.
+
+### Step Definition Best Practice
+
+**Step definitions must only delegate actions to service or page object classes.**
+Never perform browser/page setup, navigation, waits, assertions, or error handling directly in step definitions. Instead, call a method in a service class (e.g., `PlaywrightService.loadPrimeSkyHomepage()`) that encapsulates all logic. This ensures maintainability, separation of concerns, and clean BDD code.
+
+**Example:**
+
+```java
+@Given("PrimeSky homepage is loaded")
+public void primeSkyHomepageIsLoaded() {
+  PlaywrightService.loadPrimeSkyHomepage();
+}
+```
+
+All browser/page logic (navigation, waits, assertions, logging, error handling, screenshots) must be implemented in the service class method.
+
+# Framework Improvement Recommendations
+
+1. **Expand Page Object Coverage**  
+   - Create dedicated page object classes for all major pages (e.g., SearchResultsPage, ContactPage) to improve modularity and test clarity.
+
+2. **Strict Service Layer Delegation**  
+   - Ensure all step definitions delegate actions to service or page object classes. No direct Playwright or assertion logic should be present in step files.
+
+3. **Multiple Selector Strategies**  
+   - All element locators in page objects must use multiple strategies (data-testid, id, class, text) and fallback logic for robustness.
+
+4. **Screenshot on Failure**  
+   - Confirm that PlaywrightService or test hooks capture screenshots on every failure and attach them to reports.
+
+5. **Assertion Messages**  
+   - All assertions should have meaningful, descriptive messages for easier debugging.
+
+6. **Comprehensive Logging**  
+   - Every major action (navigation, click, assertion, error) must be logged with context (e.g., which page, which element, what data).
+
+7. **Input Validation**  
+   - All public methods in page objects and services should validate input parameters and handle null/invalid values gracefully.
+
+8. **Error Handling**  
+   - Service and page object methods should catch exceptions, log errors, and take screenshots before rethrowing or handling gracefully.
+
+9. **Test Data Management**  
+   - Consider a strategy for managing test data (e.g., using data tables, external files, or a test data factory).
+
+10. **Cross-Browser Testing**  
+    - Ensure BrowserManager supports launching different browsers (Chromium, Firefox, WebKit) and that tests are run across all supported browsers.
+
+11. **Advanced Reporting**  
+    - Integrate advanced reporting (e.g., Allure, ExtentReports) for better visibility of test results, logs, and screenshots.
+
+12. **Code Duplication**  
+    - Review for any duplicated logic in page objects or services and refactor into utility/helper classes if needed.
+
+13. **Edge Case Handling**  
+    - Ensure your framework handles dynamic content, hidden elements, and slow-loading pages robustly.
+
+14. **Documentation**  
+    - Keep your README and framework documentation up to date, especially regarding setup, running tests, and troubleshooting.
+
+---
