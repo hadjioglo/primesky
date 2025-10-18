@@ -1,49 +1,35 @@
+
 package service;
 
+import pages.HomePage;
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.LoadState;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+// ...existing code...
 
 /**
  * Website Explorer for https://fdev.primesky.com/
- * This class explores the website to identify key functionalities and UI elements for testing
+ * This class explores the website to identify key functionalities and UI
+ * elements for testing
  */
 public class PlaywrightService {
-    
-    private static final String TARGET_URL = "https://fdev.primesky.com/";
-    private static final String SCREENSHOTS_DIR = "target/screenshots/";
-    
-    private Playwright playwright;
-    private Browser browser;
-    private BrowserContext context;
-    private Page page;
-    
+    private static final BrowserManager browserManager = BrowserManager.getInstance();
+    private static final Page page = browserManager.getPage();
+    private static final HomePage homePage = new HomePage(page);
 
-    private void setupBrowser() {
-    }
-    
-    private void navigateToWebsite() {
-        System.out.println("=== Navigating to website ===");
-        
+    /**
+     * Loads the PrimeSky homepage using HomePage page object.
+     * Handles navigation, waits, and error handling.
+     */
+    public static void loadPrimeSkyHomepage() {
+        try {
+            homePage.load();
+            homePage.assertLoaded();
+        } catch (Exception e) {
+            // Optionally, capture screenshot on failure if implemented
+            throw new RuntimeException("Failed to load PrimeSky homepage", e);
+        }
     }
 
+    // ...existing code...
 
-    
-    private void cleanup() {
-        System.out.println("\n=== Cleaning up browser resources ===");
-        
-        if (context != null) {
-            context.close();
-        }
-        if (browser != null) {
-            browser.close();
-        }
-        if (playwright != null) {
-            playwright.close();
-        }
-        
-        System.out.println("Exploration completed successfully!");
-    }
+    // ...existing code...
 }

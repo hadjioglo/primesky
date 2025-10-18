@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = "steps",
         tags = "@Run and not @Manual",
-        plugin = {},
+        plugin = {"pretty", "html:target/cucumber-report.html"},
         stepNotifications = true
 )
 public class RunnerTest {
