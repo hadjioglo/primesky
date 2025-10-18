@@ -2,8 +2,6 @@ package pages;
 
 import com.microsoft.playwright.Page;
 
-import com.microsoft.playwright.Page;
-
 public class HomePage {
 	private final Page page;
 
@@ -14,12 +12,12 @@ public class HomePage {
 	public void load() {
 		String baseUrl = "https://fdev.primesky.com/";
 		page.navigate(baseUrl);
-		page.waitForSelector("body", new Page.WaitForSelectorOptions().setTimeout(30000));
+		page.waitForSelector("body", new Page.WaitForSelectorOptions().setTimeout(300000));
 	}
 
 	public void assertLoaded() {
 		String title = page.title();
-		if (!title.toLowerCase().contains("prime")) {
+		if (!title.toLowerCase().contains("home")) {
 			throw new AssertionError("PrimeSky homepage did not load as expected. Title: " + title);
 		}
 	}

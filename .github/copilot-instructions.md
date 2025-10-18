@@ -89,19 +89,13 @@ public static void loadPrimeSkyHomepage() {
 # Good scenario structure
 @flight-search @high-priority
 Scenario: Search for flights with valid criteria
-  Given the flight search page is open
-  When the flight search form is filled with valid details
-    | Field           | Value       |
-    | Origin          | New York    |
-    | Destination     | Los Angeles |
-    | Departure Date  | 2025-12-15  |
-    | Return Date     | 2025-12-22  |
-    | Passengers      | 2           |
-    | Trip Type       | Round Trip  |
-  And the flight search is submitted
-  Then a list of available flights should be displayed
-  And the search results should contain flights from "New York" to "Los Angeles"
-  And the results should show the correct departure date
+Given PrimeSky homepage is loaded
+When user searches for the flight
+| from   | to       | departure date | return date | passengers | class |
+| London | New-York | 2026-02-15     | 2026-02-25  | 1          | E     |
+Then flight results are displayed
+And the search results should contain flights from "New York" to "Los Angeles"
+And the results should show the correct departure date
 ```
 
 ### Test Execution Patterns
@@ -243,3 +237,49 @@ public void primeSkyHomepageIsLoaded() {
 ```
 
 All browser/page logic (navigation, waits, assertions, logging, error handling, screenshots) must be implemented in the service class method.
+
+# Framework Improvement Recommendations
+
+1. **Expand Page Object Coverage**  
+   - Create dedicated page object classes for all major pages (e.g., SearchResultsPage, ContactPage) to improve modularity and test clarity.
+
+2. **Strict Service Layer Delegation**  
+   - Ensure all step definitions delegate actions to service or page object classes. No direct Playwright or assertion logic should be present in step files.
+
+3. **Multiple Selector Strategies**  
+   - All element locators in page objects must use multiple strategies (data-testid, id, class, text) and fallback logic for robustness.
+
+4. **Screenshot on Failure**  
+   - Confirm that PlaywrightService or test hooks capture screenshots on every failure and attach them to reports.
+
+5. **Assertion Messages**  
+   - All assertions should have meaningful, descriptive messages for easier debugging.
+
+6. **Comprehensive Logging**  
+   - Every major action (navigation, click, assertion, error) must be logged with context (e.g., which page, which element, what data).
+
+7. **Input Validation**  
+   - All public methods in page objects and services should validate input parameters and handle null/invalid values gracefully.
+
+8. **Error Handling**  
+   - Service and page object methods should catch exceptions, log errors, and take screenshots before rethrowing or handling gracefully.
+
+9. **Test Data Management**  
+   - Consider a strategy for managing test data (e.g., using data tables, external files, or a test data factory).
+
+10. **Cross-Browser Testing**  
+    - Ensure BrowserManager supports launching different browsers (Chromium, Firefox, WebKit) and that tests are run across all supported browsers.
+
+11. **Advanced Reporting**  
+    - Integrate advanced reporting (e.g., Allure, ExtentReports) for better visibility of test results, logs, and screenshots.
+
+12. **Code Duplication**  
+    - Review for any duplicated logic in page objects or services and refactor into utility/helper classes if needed.
+
+13. **Edge Case Handling**  
+    - Ensure your framework handles dynamic content, hidden elements, and slow-loading pages robustly.
+
+14. **Documentation**  
+    - Keep your README and framework documentation up to date, especially regarding setup, running tests, and troubleshooting.
+
+---
