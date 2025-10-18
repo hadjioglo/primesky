@@ -4,8 +4,9 @@ Feature: PrimeSky Website Core Functionality
   @page-load @high-priority @Run
   Scenario: Verify homepage loads successfully
     Given PrimeSky homepage is loaded
-    # When PrimeSky website is navigated to
-    # Then page loads completely
-    # And page title is displayed
-    # And all critical page elements are visible
-    # And no JavaScript errors are present
+    When user searches for the flight
+      | from   | to       | departure date | return date | passengers | class |
+      | London | New York | 2026-02-15     | 2026-02-25  | 1          | E     |
+    Then flight results are displayed
+    And the search results should contain flights from "London" to "New Yorks"
+    And the results should show the correct departure date
